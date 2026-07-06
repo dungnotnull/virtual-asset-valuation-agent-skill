@@ -1,0 +1,114 @@
+{
+  "challenges": [
+    "Account-transfer ToS may change; valuation contingent on enforceability",
+    "Skin illiquidity: cosmetics may not realise cost basis at sale"
+  ],
+  "confidence": 0.644,
+  "dimensions": [
+    {
+      "confidence": 0.7,
+      "dimension": "comparable account sales",
+      "evidence": [
+        {
+          "claim": "Comparable 420-level accounts sold $1.4k-$2.4k (2025)",
+          "framework": "comparable_sales_with_liquidity_adjustment",
+          "retrieved_at": "2026-07-06",
+          "source": "PlayerAuctions",
+          "tier": "primary_market_data",
+          "url": "https://www.playerauctions.com/sell"
+        }
+      ],
+      "framework": "comparable_sales_with_liquidity_adjustment",
+      "high": 2400,
+      "low": 1400,
+      "notes": "12 comparable sales pooled",
+      "point_estimate": 1900,
+      "weight": 0.6
+    },
+    {
+      "confidence": 0.6,
+      "dimension": "progression utility (cost basis)",
+      "evidence": [
+        {
+          "claim": "Cosmetic acquisition cost ~$1.6k",
+          "framework": "intangible_asset_valuation_cost_market_income",
+          "retrieved_at": "2026-07-06",
+          "source": "In-game shop",
+          "tier": "primary_market_data",
+          "url": "https://store.example-game.com"
+        }
+      ],
+      "framework": "intangible_asset_valuation_cost_market_income",
+      "high": 2100,
+      "low": 1100,
+      "notes": "Cost-floor triangulation",
+      "point_estimate": 1600,
+      "weight": 0.4
+    }
+  ],
+  "limitations": [
+    "Platform ToS interpretation offline"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "game_account",
+    "assumptions": [
+      "Account transfer permitted under platform ToS at time of listing"
+    ],
+    "attributes": {
+      "hours": 5200,
+      "level": 420,
+      "rare_skins": 9
+    },
+    "identifiers": {
+      "account_id": "STEAM_0:1:123456",
+      "platform": "steam"
+    },
+    "notes": "MMORPG account",
+    "provenance": "Original owner since 2010",
+    "purpose": "listing",
+    "utility": "High-tier progression + rare cosmetics"
+  },
+  "risk": {
+    "composite_discount": 0.15,
+    "custody_risk": 0.25,
+    "evidence": [
+      {
+        "claim": "Account sales carry recovery-risk for buyers",
+        "framework": "risk_discounting_platform_custody_regulatory",
+        "retrieved_at": "2026-07-06",
+        "source": "PlayerAuctions guide",
+        "tier": "field_study",
+        "url": "https://www.playerauctions.com/safety"
+      }
+    ],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.3,
+    "rationale": "Higher platform/regulatory risk due to account-transfer ToS.",
+    "regulatory_risk": 0.35,
+    "wash_trade_flags": [],
+    "wash_trade_risk": 0.05
+  },
+  "roadmap": [
+    {
+      "action": "Use an escrow-based account marketplace to mitigate recovery risk",
+      "effort": 1,
+      "evidence": [],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Escrow lowers buyer risk premium"
+    },
+    {
+      "action": "Bundle a fresh progression milestone to lift listing appeal",
+      "effort": 3,
+      "evidence": [],
+      "impact": 3,
+      "owner": "",
+      "rationale": "Recent milestones raise realised prices"
+    }
+  ],
+  "value_high": 1938.0,
+  "value_low": 1088.0,
+  "value_point": 1513.0
+}

@@ -1,0 +1,125 @@
+{
+  "challenges": [
+    "Comparable pool is thin (n<20); median may be skewed by outlier sales",
+    "Parking revenue may decline as ad eCPMs compress over the horizon"
+  ],
+  "confidence": 0.644,
+  "dimensions": [
+    {
+      "confidence": 0.7,
+      "dimension": "comparable .com sales",
+      "evidence": [
+        {
+          "claim": "Median 11-char .com brandable sales 2024-2025 ~ $28k",
+          "framework": "comparable_sales_with_liquidity_adjustment",
+          "retrieved_at": "2026-07-06",
+          "source": "NameBio",
+          "tier": "primary_market_data",
+          "url": "https://namebio.com/search?keyword=example"
+        }
+      ],
+      "framework": "comparable_sales_with_liquidity_adjustment",
+      "high": 35000,
+      "low": 22000,
+      "notes": "Pooled recent .com brandable sales",
+      "point_estimate": 28000,
+      "weight": 0.5
+    },
+    {
+      "confidence": 0.6,
+      "dimension": "parking revenue DCF",
+      "evidence": [
+        {
+          "claim": "Parking RPM yields ~$120/mo; 5y DCF @18%",
+          "framework": "income_approach",
+          "retrieved_at": "2026-07-06",
+          "source": "Sedo parking report",
+          "tier": "field_study",
+          "url": "https://sedo.com/statistics"
+        }
+      ],
+      "framework": "income_approach",
+      "high": 24000,
+      "low": 12000,
+      "notes": "Gordon terminal @1% growth",
+      "point_estimate": 18000,
+      "weight": 0.3
+    }
+  ],
+  "limitations": [
+    "Offline comp sources limited to NameBio"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "domain",
+    "assumptions": [
+      "Parking revenue assumed stable over 5y horizon"
+    ],
+    "attributes": {
+      "keyword": "example",
+      "length": 11,
+      "monthly_parking_revenue": 120
+    },
+    "identifiers": {
+      "domain": "example.com",
+      "tld": "com"
+    },
+    "notes": "Comparable .com sales 2023-2025",
+    "provenance": "Registered 1999; current registrant since 2015",
+    "purpose": "appraisal",
+    "utility": "Brandable .com, parked domain revenue"
+  },
+  "risk": {
+    "composite_discount": 0.05,
+    "custody_risk": 0.05,
+    "evidence": [
+      {
+        "claim": "Domain registrars carry low counterparty risk",
+        "framework": "risk_discounting_platform_custody_regulatory",
+        "retrieved_at": "2026-07-06",
+        "source": "NameBio aggregate stats",
+        "tier": "field_study",
+        "url": "https://namebio.com/stats"
+      }
+    ],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.1,
+    "rationale": "Low platform/custody/regulatory risk; thin liquidity haircut.",
+    "regulatory_risk": 0.1,
+    "wash_trade_flags": [
+      "no on-chain history for domains"
+    ],
+    "wash_trade_risk": 0.02
+  },
+  "roadmap": [
+    {
+      "action": "List on a premium-domain marketplace with a 90-day BIN + best-offer",
+      "effort": 2,
+      "evidence": [
+        {
+          "claim": "Premium listings sell faster",
+          "framework": "comparable_sales_with_liquidity_adjustment",
+          "retrieved_at": "2026-07-06",
+          "source": "Dan.com report",
+          "tier": "field_study",
+          "url": "https://dan.com/research"
+        }
+      ],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Broader reach improves realisation price"
+    },
+    {
+      "action": "Develop a one-page lander to capture direct inquiries",
+      "effort": 2,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Direct end-user inquiries outperform parking"
+    }
+  ],
+  "value_high": 29331.25,
+  "value_low": 17337.5,
+  "value_point": 23037.5
+}

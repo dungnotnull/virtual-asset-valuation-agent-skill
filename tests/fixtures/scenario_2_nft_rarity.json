@@ -1,0 +1,108 @@
+{
+  "challenges": [
+    "Rarity premium assumes buyer demand for rare traits persists; floor may compress",
+    "Single-marketplace liquidity data; cross-market depth not captured"
+  ],
+  "confidence": 0.64,
+  "dimensions": [
+    {
+      "confidence": 0.75,
+      "dimension": "statistical rarity",
+      "evidence": [
+        {
+          "claim": "Token combines two rare traits (gold bg 5%, laser eyes 3%)",
+          "framework": "rarity_scoring_trait_frequency",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea metadata",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/assets/0xabc/7777"
+        }
+      ],
+      "framework": "rarity_scoring_trait_frequency",
+      "high": 20.578,
+      "low": 13.719,
+      "notes": "Product-of-rarities, geometric mean normalisation",
+      "point_estimate": 17.148,
+      "weight": 0.6
+    },
+    {
+      "confidence": 0.65,
+      "dimension": "floor & liquidity",
+      "evidence": [
+        {
+          "claim": "Collection floor 12 ETH, 7d sales 420",
+          "framework": "liquidity_floor_price_bid_ask_depth",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea stats",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/boredapeexample"
+        }
+      ],
+      "framework": "liquidity_floor_price_bid_ask_depth",
+      "high": 15.600000000000001,
+      "low": 10.8,
+      "notes": "Floor anchoring with 35% illiquidity haircut",
+      "point_estimate": 13.200000000000001,
+      "weight": 0.4
+    }
+  ],
+  "limitations": [
+    "Blur depth unavailable offline"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "nft",
+    "assumptions": [
+      "Trait data from on-chain metadata"
+    ],
+    "attributes": {
+      "collection": "boredapeexample",
+      "collection_size": 10000,
+      "trait_count": 7
+    },
+    "identifiers": {
+      "chain": "ethereum",
+      "contract": "0xabc",
+      "token_id": "7777"
+    },
+    "notes": "Floor ~12 ETH",
+    "provenance": "Minted 2022, held in cold wallet",
+    "purpose": "appraisal",
+    "utility": "PFP collection membership + commercial rights"
+  },
+  "risk": {
+    "composite_discount": 0.1,
+    "custody_risk": 0.2,
+    "evidence": [],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.15,
+    "rationale": "Cold-wallet custody, low wash signal.",
+    "regulatory_risk": 0.2,
+    "wash_trade_flags": [
+      "no round-trip pairs detected"
+    ],
+    "wash_trade_risk": 0.1
+  },
+  "roadmap": [
+    {
+      "action": "List on OpenSea at floor+8% with declining-price option",
+      "effort": 2,
+      "evidence": [],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Rare-trait premium captured within 30-day window"
+    },
+    {
+      "action": "Move to multi-sig custody before listing",
+      "effort": 1,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Reduces custody-risk haircut"
+    }
+  ],
+  "value_high": 16.73,
+  "value_low": 11.3,
+  "value_point": 14.01
+}

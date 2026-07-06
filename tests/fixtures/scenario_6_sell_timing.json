@@ -1,0 +1,112 @@
+{
+  "challenges": [
+    "Seasonality sample is short; peak window may shift",
+    "Cross-listing raises platform-risk surface"
+  ],
+  "confidence": 0.622,
+  "dimensions": [
+    {
+      "confidence": 0.65,
+      "dimension": "liquidity timing",
+      "evidence": [
+        {
+          "claim": "7d sales seasonality peaks Thu-Sat",
+          "framework": "liquidity_floor_price_bid_ask_depth",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea stats",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/boredapeexample"
+        }
+      ],
+      "framework": "liquidity_floor_price_bid_ask_depth",
+      "high": 18.863,
+      "low": 15.434,
+      "notes": "Listing window analysis",
+      "point_estimate": 17.148,
+      "weight": 0.5
+    },
+    {
+      "confidence": 0.7,
+      "dimension": "comparables",
+      "evidence": [
+        {
+          "claim": "Recent rare-trait sales at floor+5%",
+          "framework": "comparable_sales_with_liquidity_adjustment",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/boredapeexample"
+        }
+      ],
+      "framework": "comparable_sales_with_liquidity_adjustment",
+      "high": 15.0,
+      "low": 10.8,
+      "notes": "Recent realised sales",
+      "point_estimate": 12.600000000000001,
+      "weight": 0.5
+    }
+  ],
+  "limitations": [
+    "Seasonality derived offline"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "nft",
+    "assumptions": [
+      "Listing strategy optimisation"
+    ],
+    "attributes": {
+      "collection": "boredapeexample"
+    },
+    "identifiers": {
+      "chain": "ethereum",
+      "contract": "0xabc",
+      "token_id": "7777"
+    },
+    "notes": "Timing-focused",
+    "provenance": "Same as scenario 2",
+    "purpose": "listing",
+    "utility": "PFP"
+  },
+  "risk": {
+    "composite_discount": 0.08,
+    "custody_risk": 0.2,
+    "evidence": [],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.15,
+    "rationale": "Stable.",
+    "regulatory_risk": 0.2,
+    "wash_trade_flags": [],
+    "wash_trade_risk": 0.08
+  },
+  "roadmap": [
+    {
+      "action": "List Thursday 16:00 UTC to peak weekend liquidity",
+      "effort": 1,
+      "evidence": [],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Captures highest bid depth"
+    },
+    {
+      "action": "Use a 7-day declining-price auction starting at floor+10%",
+      "effort": 2,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Balances premium capture vs. sale probability"
+    },
+    {
+      "action": "Cross-list on OpenSea + Blur with royalty-aware pricing",
+      "effort": 3,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Maximises reach"
+    }
+  ],
+  "value_high": 15.58,
+  "value_low": 12.07,
+  "value_point": 13.68
+}

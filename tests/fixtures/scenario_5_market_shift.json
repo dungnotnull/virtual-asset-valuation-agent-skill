@@ -1,0 +1,104 @@
+{
+  "challenges": [
+    "Floor may fall further; re-pricing assumes 7d snapshot is representative",
+    "Liquidity measure is single-marketplace"
+  ],
+  "confidence": 0.605,
+  "dimensions": [
+    {
+      "confidence": 0.7,
+      "dimension": "rarity re-priced to new floor",
+      "evidence": [
+        {
+          "claim": "Updated floor 9.5 ETH after 7d drawdown",
+          "framework": "rarity_scoring_trait_frequency",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea stats",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/boredapeexample"
+        }
+      ],
+      "framework": "rarity_scoring_trait_frequency",
+      "high": 14.977,
+      "low": 11.07,
+      "notes": "Re-anchored to refreshed floor",
+      "point_estimate": 13.023,
+      "weight": 0.6
+    },
+    {
+      "confidence": 0.6,
+      "dimension": "degraded liquidity",
+      "evidence": [
+        {
+          "claim": "7d sales fell 420->180; spread widened",
+          "framework": "liquidity_floor_price_bid_ask_depth",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea stats",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/boredapeexample"
+        }
+      ],
+      "framework": "liquidity_floor_price_bid_ask_depth",
+      "high": 11.4,
+      "low": 8.075,
+      "notes": "Larger illiquidity haircut",
+      "point_estimate": 9.5,
+      "weight": 0.4
+    }
+  ],
+  "limitations": [
+    "Cross-market depth not refreshed offline"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "nft",
+    "assumptions": [
+      "Floor re-fetched after 7d"
+    ],
+    "attributes": {
+      "collection": "boredapeexample"
+    },
+    "identifiers": {
+      "chain": "ethereum",
+      "contract": "0xabc",
+      "token_id": "7777"
+    },
+    "notes": "Re-pricing after market shift",
+    "provenance": "Same as scenario 2",
+    "purpose": "portfolio",
+    "utility": "PFP"
+  },
+  "risk": {
+    "composite_discount": 0.08,
+    "custody_risk": 0.2,
+    "evidence": [],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.15,
+    "rationale": "Stable custody; liquidity dropped.",
+    "regulatory_risk": 0.2,
+    "wash_trade_flags": [],
+    "wash_trade_risk": 0.08
+  },
+  "roadmap": [
+    {
+      "action": "Hold; do not list into thin liquidity",
+      "effort": 1,
+      "evidence": [],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Avoids realising the illiquidity haircut"
+    },
+    {
+      "action": "Set a limit order above floor to capture recovery",
+      "effort": 3,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Captures bounce without market-selling"
+    }
+  ],
+  "value_high": 12.46,
+  "value_low": 9.08,
+  "value_point": 10.68
+}

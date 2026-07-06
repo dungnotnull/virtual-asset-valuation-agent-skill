@@ -1,0 +1,116 @@
+{
+  "challenges": [
+    "Wash-trade heuristics may miss sophisticated cross-wallet patterns",
+    "Composite discount is heuristic; legal/regulatory action may zero value"
+  ],
+  "confidence": 0.592,
+  "dimensions": [
+    {
+      "confidence": 0.55,
+      "dimension": "washed comparables discounted",
+      "evidence": [
+        {
+          "claim": "After removing round-trips, median sale ~$6.8k",
+          "framework": "comparable_sales_with_liquidity_adjustment",
+          "retrieved_at": "2026-07-06",
+          "source": "Chainalysis",
+          "tier": "meta_analysis",
+          "url": "https://www.chainalysis.com/reports/nft-wash-trading"
+        }
+      ],
+      "framework": "comparable_sales_with_liquidity_adjustment",
+      "high": 8200,
+      "low": 5500,
+      "notes": "Discounted comparable set",
+      "point_estimate": 6800,
+      "weight": 0.6
+    },
+    {
+      "confidence": 0.6,
+      "dimension": "rarity floor",
+      "evidence": [
+        {
+          "claim": "Token rarity mid-tier; floor anchor",
+          "framework": "rarity_scoring_trait_frequency",
+          "retrieved_at": "2026-07-06",
+          "source": "OpenSea",
+          "tier": "primary_market_data",
+          "url": "https://opensea.io/collection/washexample"
+        }
+      ],
+      "framework": "rarity_scoring_trait_frequency",
+      "high": 8000,
+      "low": 6000,
+      "notes": "Rarity within collection",
+      "point_estimate": 7000,
+      "weight": 0.4
+    }
+  ],
+  "limitations": [
+    "Only heuristic screening; no forensic graph offline"
+  ],
+  "outcome": "proceed",
+  "profile": {
+    "asset_type": "nft",
+    "assumptions": [
+      "On-chain history flagged"
+    ],
+    "attributes": {
+      "collection": "washexample"
+    },
+    "identifiers": {
+      "chain": "ethereum",
+      "contract": "0xdef",
+      "token_id": "3"
+    },
+    "notes": "Buyer due-diligence",
+    "provenance": "Minted 2021",
+    "purpose": "purchase",
+    "utility": "PFP + community"
+  },
+  "risk": {
+    "composite_discount": 0.31475456000000024,
+    "custody_risk": 0.2,
+    "evidence": [
+      {
+        "claim": "Wash-trading inflates NFT price histories",
+        "framework": "risk_discounting_platform_custody_regulatory",
+        "retrieved_at": "2026-07-06",
+        "source": "Chainalysis NFT report",
+        "tier": "meta_analysis",
+        "url": "https://www.chainalysis.com/reports/nft-wash-trading"
+      }
+    ],
+    "framework": "risk_discounting_platform_custody_regulatory",
+    "in_scope": true,
+    "platform_risk": 0.2,
+    "rationale": "Wash-trade signal detected; comparables discounted.",
+    "regulatory_risk": 0.2,
+    "wash_trade_flags": [
+      "wallet pair ('0xA', '0xB') transacted 3 times (possible round-trip)",
+      "3 sub-minute transfers detected (bot-like cadence)"
+    ],
+    "wash_trade_risk": 0.3
+  },
+  "roadmap": [
+    {
+      "action": "Re-derive comparables from only fresh-wallet sales",
+      "effort": 2,
+      "evidence": [],
+      "impact": 5,
+      "owner": "",
+      "rationale": "Removes wash-trade bias"
+    },
+    {
+      "action": "Demand on-chain provenance proof before bidding",
+      "effort": 1,
+      "evidence": [],
+      "impact": 4,
+      "owner": "",
+      "rationale": "Reduces forgery risk"
+    }
+  ],
+  "value_high": 5564.19,
+  "value_low": 3905.9,
+  "value_point": 4714.49
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skills/virtual-asset-valuation/schemas/gate_schema.json",
+  "title": "QualityGateContract",
+  "description": "Machine-readable form of the three quality gates enforced before any scored deliverable is emitted. Shared across the finance-insurance cluster (Phase 5).",
+  "type": "object",
+  "required": ["gates", "min_material_tier", "min_evidence_per_dimension", "min_challenges", "min_proceed_confidence", "min_frameworks"],
+  "properties": {
+    "min_material_tier": { "type": "string", "enum": ["blog", "expert_opinion", "field_study", "cohort", "benchmark", "rct", "meta_analysis", "systematic_review", "primary_market_data"] },
+    "min_evidence_per_dimension": { "type": "integer", "minimum": 1 },
+    "min_challenges": { "type": "integer", "minimum": 1 },
+    "min_proceed_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "min_frameworks": { "type": "integer", "minimum": 2, "description": "triangulation requires >=2 distinct named frameworks" },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "predicate"],
+        "properties": {
+          "name": { "type": "string", "enum": ["evidence", "framework", "challenge"] },
+          "predicate": { "type": "string" },
+          "on_fail": { "type": "string", "enum": ["block", "degrade"] }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "min_material_tier": "field_study",
+      "min_evidence_per_dimension": 1,
+      "min_challenges": 2,
+      "min_proceed_confidence": 0.5,
+      "min_frameworks": 2,
+      "gates": [
+        { "name": "evidence", "predicate": "every material claim traceable to a cited source at >= min_material_tier", "on_fail": "block" },
+        { "name": "framework", "predicate": "all scoring cites a named governing framework; >=2 distinct frameworks used", "on_fail": "block" },
+        { "name": "challenge", "predicate": ">=2 devil's-advocate challenges present and substantive", "on_fail": "block" }
+      ]
+    }
+  ]
+}

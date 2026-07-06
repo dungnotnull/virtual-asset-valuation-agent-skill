@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skills/virtual-asset-valuation/schemas/valuation_schema.json",
+  "title": "ValuationReport",
+  "description": "Canonical shared scoring schema for the finance-insurance cluster skill `virtual-asset-valuation`. Standardised across cluster siblings to avoid duplicated scoring logic (Phase 5).",
+  "type": "object",
+  "required": ["profile", "risk", "dimensions", "roadmap", "value_point", "value_low", "value_high", "confidence", "outcome"],
+  "properties": {
+    "profile": { "$ref": "#/$defs/AssetProfile" },
+    "risk": { "$ref": "#/$defs/RiskScreen" },
+    "dimensions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/ScoredDimension" } },
+    "roadmap": { "type": "array", "items": { "$ref": "#/$defs/RoadmapItem" } },
+    "value_point": { "type": "number" },
+    "value_low": { "type": "number" },
+    "value_high": { "type": "number" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "challenges": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 8 } },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "outcome": { "type": "string", "enum": ["proceed", "refuse", "degrade"] }
+  },
+  "$defs": {
+    "AssetType": { "type": "string", "enum": ["nft", "game_account", "domain"] },
+    "ValuationPurpose": { "type": "string", "enum": ["appraisal", "listing", "purchase", "portfolio", "collateral"] },
+    "EvidenceTier": { "type": "string", "enum": ["blog", "expert_opinion", "field_study", "cohort", "benchmark", "rct", "meta_analysis", "systematic_review", "primary_market_data"] },
+    "GoverningFramework": { "type": "string", "enum": [
+      "comparable_sales_with_liquidity_adjustment",
+      "income_approach",
+      "rarity_scoring_trait_frequency",
+      "liquidity_floor_price_bid_ask_depth",
+      "intangible_asset_valuation_cost_market_income",
+      "risk_discounting_platform_custody_regulatory"
+    ]},
+    "Evidence": {
+      "type": "object",
+      "required": ["claim", "source", "url", "tier"],
+      "properties": {
+        "claim": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "minLength": 1, "format": "uri" },
+        "tier": { "$ref": "#/$defs/EvidenceTier" },
+        "framework": { "$ref": "#/$defs/GoverningFramework" },
+        "retrieved_at": { "type": "string" }
+      }
+    },
+    "AssetProfile": {
+      "type": "object",
+      "required": ["asset_type", "purpose", "identifiers", "provenance", "utility"],
+      "properties": {
+        "asset_type": { "$ref": "#/$defs/AssetType" },
+        "purpose": { "$ref": "#/$defs/ValuationPurpose" },
+        "identifiers": { "type": "object", "minProperties": 1 },
+        "provenance": { "type": "string", "minLength": 1 },
+        "utility": { "type": "string", "minLength": 1 },
+        "attributes": { "type": "object" },
+        "assumptions": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "RiskScreen": {
+      "type": "object",
+      "required": ["framework", "in_scope", "platform_risk", "custody_risk", "wash_trade_risk", "regulatory_risk", "composite_discount", "rationale"],
+      "properties": {
+        "framework": { "$ref": "#/$defs/GoverningFramework" },
+        "in_scope": { "type": "boolean" },
+        "platform_risk": { "type": "number", "minimum": 0, "maximum": 1 },
+        "custody_risk": { "type": "number", "minimum": 0, "maximum": 1 },
+        "wash_trade_risk": { "type": "number", "minimum": 0, "maximum": 1 },
+        "regulatory_risk": { "type": "number", "minimum": 0, "maximum": 1 },
+        "composite_discount": { "type": "number", "minimum": 0, "maximum": 1 },
+        "wash_trade_flags": { "type": "array", "items": { "type": "string" } },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/Evidence" } }
+      }
+    },
+    "ScoredDimension": {
+      "type": "object",
+      "required": ["framework", "dimension", "point_estimate", "low", "high", "weight", "confidence"],
+      "properties": {
+        "framework": { "$ref": "#/$defs/GoverningFramework" },
+        "dimension": { "type": "string", "minLength": 1 },
+        "point_estimate": { "type": "number" },
+        "low": { "type": "number" },
+        "high": { "type": "number" },
+        "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/Evidence" } },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        { "properties": { "low": { "type": "number" }, "point_estimate": { "type": "number" }, "high": { "type": "number" } } }
+      ]
+    },
+    "RoadmapItem": {
+      "type": "object",
+      "required": ["action", "effort", "impact", "rationale"],
+      "properties": {
+        "action": { "type": "string", "minLength": 1 },
+        "effort": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "impact": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "rationale": { "type": "string", "minLength": 1 },
+        "evidence": { "type": "array", "items": { "$ref": "#/$defs/Evidence" } },
+        "owner": { "type": "string" }
+      }
+    }
+  }
+}
